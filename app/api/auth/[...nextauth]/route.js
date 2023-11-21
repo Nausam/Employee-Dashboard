@@ -27,21 +27,21 @@ export async function GET(req, res) {
       },
       async signIn({ profile }) {
         try {
-          const allowedEmails = ["hnaisam@gmail.com", "adaaran004@gmail.com"];
-          if (allowedEmails.includes(profile.email)) {
-            // check if user already exists
-            const userExists = await User.findOne({ email: profile.email });
+          // const allowedEmails = ["hnaisam@gmail.com", "adaaran004@gmail.com"];
+          // if (allowedEmails.includes(profile.email)) {}
+          // check if user already exists
+          const userExists = await User.findOne({ email: profile.email });
 
-            // if not, create a new document and save user in MongoDB
-            if (!userExists) {
-              await User.create({
-                email: profile.email,
-                username: profile.name.replace(" ", "").toLowerCase(),
-                image: profile.picture,
-              });
-            }
-            return true;
+          // if not, create a new document and save user in MongoDB
+          if (!userExists) {
+            await User.create({
+              email: profile.email,
+              username: profile.name.replace(" ", "").toLowerCase(),
+              image: profile.picture,
+            });
           }
+          return true;
+
           return "/error";
         } catch (error) {
           console.log("Error checking if user exists: ", error.message);

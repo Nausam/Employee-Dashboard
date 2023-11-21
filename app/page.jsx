@@ -6,6 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
 
 import LeaveUpdateModal from "@components/LeaveUpdateModal";
+import Image from "next/image";
 
 const Home = () => {
   const { data: session } = useSession();
@@ -53,17 +54,34 @@ const Home = () => {
   };
 
   return (
-    <section className="w-full h-screen flex flex-col">
-      <motion.h1
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="head_text2 text-center orange_gradient mb-20 z-50 tracking-wide"
-      >
-        Employee Dashboard
-      </motion.h1>
+    <section className="w-full h-screen items-center justify-center">
+      <div className="flex flex-wrap justify-center items-center gap-5">
+        <div>
+          <motion.h1
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+            className="text-7xl font-bold text-center orange_gradient mb-20 z-50 tracking-wide max-w-md"
+          >
+            Employee Dashboard
+          </motion.h1>
+        </div>
 
-      {session?.user ? (
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <Image
+            src="/assets/images/hero.png"
+            width={500}
+            height={500}
+            alt="hero image"
+          />
+        </motion.div>
+      </div>
+
+      {/* {session?.user ? (
         <div className="flex flex-center justify-center items-center gap-3">
           <motion.button
             initial={{ opacity: 0 }}
@@ -89,7 +107,7 @@ const Home = () => {
         </div>
       ) : (
         <></>
-      )}
+      )} */}
       <AnimatePresence>
         {isModalOpen && (
           <LeaveUpdateModal
